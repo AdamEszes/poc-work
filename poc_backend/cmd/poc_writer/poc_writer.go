@@ -13,7 +13,7 @@ import (
 
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var item model.NewsItem
-	err := json.Unmarshal([]byte(request.Body), item)
+	err := json.Unmarshal([]byte(request.Body), &item)
 	if err != nil {
 		return events.APIGatewayProxyResponse{StatusCode: 400}, err
 	}
