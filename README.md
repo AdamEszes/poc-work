@@ -1,3 +1,7 @@
+### Build in local ###
+
+Use ```.\build\build.sh``` to create artifacts
+
 #### Deploy to Sandbox ####
 ```
 terraform init --backend-config=backend_vars/sandbox.tfvars 
