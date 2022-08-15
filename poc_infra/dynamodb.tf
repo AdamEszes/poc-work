@@ -6,8 +6,8 @@ resource "aws_dynamodb_table" "news_items" {
   name         = "news_items"
   billing_mode = "PAY_PER_REQUEST"
 
-  hash_key     = "date"
-  range_key    = "title"
+  hash_key     = "Date"
+  range_key    = "Title"
 
   attribute {
     name = "Date"
