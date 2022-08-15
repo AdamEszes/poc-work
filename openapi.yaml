@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Swagger POC project - OpenAPI 3.0
+  version: 1.0.11
+servers:
+  - url: https://67xza7c3p4.execute-api.eu-west-1.amazonaws.com/sandbox
+paths:
+  /newsitem:
+    post:
+      summary: Add a new newsitem to the news
+      description: Add a new newsitem to the news
+      requestBody:
+        description: Create a new newsitem
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsItem'
+        required: true
+      responses:
+        '201':
+          description: Successfully created
+  /news:
+    get:
+      summary: List all newsitems
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: available
+            enum:
+              - available
+              - pending
+              - sold
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NewsItem'
+components:
+  schemas:
+    NewsItem:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: "2020-04-23T18:25:43.511Z"
+        title:
+          type: string
+          example: "The headline"
+        description:
+          type: string
+          example: "Something happens in the news"
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: X-API-KEY  # name of the header, query parameter or cookie
+security:
+  - ApiKeyAuth: []  
