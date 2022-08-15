@@ -26,7 +26,7 @@ func ScanTable(tableName string) (result []map[string]*dynamodb.AttributeValue) 
 	svc.ScanPages(scanInput,
 		func(page *dynamodb.ScanOutput, lastPage bool) bool {
 			result = append(result, page.Items...)
-			return lastPage
+			return !lastPage
 		})
 
 	return result

@@ -23,6 +23,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		var item model.NewsItem
 
 		err := dynamodbattribute.UnmarshalMap(i, &item)
+		items = append(items, item)
 
 		if err != nil {
 			log.Fatalf("Got error unmarshalling: %s", err)
