@@ -1,20 +1,20 @@
 resource "aws_dynamodb_table" "news_items" {
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   name         = "news_items"
   billing_mode = "PAY_PER_REQUEST"
 
-  hash_key     = "Date"
-  range_key    = "Title"
+  hash_key     = "date"
+  range_key    = "title"
 
   attribute {
-    name = "Date"
+    name = "date"
     type = "S"
   }
   attribute {
-    name = "Title"
+    name = "title"
     type = "S"
   }
 }

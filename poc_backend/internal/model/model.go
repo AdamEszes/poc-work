@@ -5,7 +5,7 @@ import (
 )
 
 type NewsItem struct {
-	Date        time.Time `json:"Date"`
-	Title       string    `json:"Title"`
-	Description string    `json:"Description"`
+	Date        time.Time `json:"date"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
 }
