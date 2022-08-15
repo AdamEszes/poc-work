@@ -10,11 +10,11 @@ resource "aws_dynamodb_table" "news_items" {
   range_key    = "title"
 
   attribute {
-    name = "date"
+    name = "Date"
     type = "S"
   }
   attribute {
-    name = "title"
+    name = "Title"
     type = "S"
   }
 }
