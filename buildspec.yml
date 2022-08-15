@@ -4,7 +4,3 @@ phases:
     commands:
       - sh ./poc_backend/build/build.sh
       - sh ./poc_backend/build/deploy.sh
-artifacts:
-  files:
-    - '**/*'
-  name: myname-$(date +%Y-%m-%d) 
