@@ -2,7 +2,7 @@
 resource "aws_lambda_function" "poc_writer" {
   function_name = "poc_writer"
   role          = aws_iam_role.poc_lambda_role.arn
-  handler       = "bin/poc_writer"
+  handler       = "poc_writer"
   filename      = "${path.module}/../poc_backend/bin/poc_writer.zip"
   runtime       = "go1.x"
   timeout       = 5
@@ -30,7 +30,7 @@ resource "aws_lambda_permission" "apigw_writer_lambda" {
 resource "aws_lambda_function" "poc_reader" {
   function_name = "poc_reader"
   role          = aws_iam_role.poc_lambda_role.arn
-  handler       = "bin/poc_reader"
+  handler       = "poc_reader"
   filename      = "${path.module}/../poc_backend/bin/poc_reader.zip"
   runtime       = "go1.x"
   timeout       = 5

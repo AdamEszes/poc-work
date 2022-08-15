@@ -1,6 +1,6 @@
 resource "aws_dynamodb_table" "news_items" {
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   name         = "news_items"

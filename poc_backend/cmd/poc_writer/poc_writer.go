@@ -1,20 +1,29 @@
 package main
 
 import (
-    "context"
+	"context"
+	"encoding/json"
 
-    "github.com/aws/aws-lambda-go/events"
-    "github.com/aws/aws-lambda-go/lambda"
+	"github.com/AdamEszes/poc-work/internal/awsprovider"
+	"github.com/AdamEszes/poc-work/internal/config"
+	"github.com/AdamEszes/poc-work/internal/model"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-    if request.HTTPMethod == "POST" {
-        return events.APIGatewayProxyResponse{Body: "yepp", StatusCode: 200}, nil
-    }
-
-    return events.APIGatewayProxyResponse{Body: "nope", StatusCode: 200}, nil
+	var item model.NewsItem
+	err := json.Unmarshal([]byte(request.Body), &item)
+	if err != nil {
+		return events.APIGatewayProxyResponse{StatusCode: 400}, err
+	}
+	err = awsprovider.PutItem(item, config.NewsTable())
+	if err != nil {
+		return events.APIGatewayProxyResponse{StatusCode: 500}, err
+	}
+	return events.APIGatewayProxyResponse{StatusCode: 201}, nil
 }
 
 func main() {
-    lambda.Start(Handler)
+	lambda.Start(Handler)
 }
