@@ -77,6 +77,9 @@ resource "aws_api_gateway_stage" "poc_api_stage" {
   rest_api_id   = aws_api_gateway_rest_api.poc_api.id
   deployment_id = aws_api_gateway_deployment.poc_api_deployment.id
   xray_tracing_enabled = true
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.clg_poc_api_access_logs.arn
+  }
 }
 
 resource "aws_api_gateway_api_key" "poc_api_key" {
