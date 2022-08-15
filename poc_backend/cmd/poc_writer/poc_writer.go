@@ -15,11 +15,11 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	var item model.NewsItem
 	err := json.Unmarshal([]byte(request.Body), item)
 	if err != nil {
-		return events.APIGatewayProxyResponse{StatusCode: 400}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 400}, err
 	}
 	err = awsprovider.PutItem(item, config.NewsTable())
 	if err != nil {
-		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, err
 	}
 	return events.APIGatewayProxyResponse{StatusCode: 201}, nil
 }
