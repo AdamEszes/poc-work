@@ -20,7 +20,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	result := awsprovider.ScanTable(tableName)
 	var items []model.NewsItem
 	for _, i := range result {
-		item := model.NewsItem{}
+		var item model.NewsItem
 
 		err := dynamodbattribute.UnmarshalMap(i, &item)
 
