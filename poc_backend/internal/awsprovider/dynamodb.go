@@ -47,7 +47,7 @@ func PutItem(item interface{}, tableName string) error {
 		TableName: aws.String(tableName),
 	}
 
-	_, err = svc.PutItemWithContext(ctx, input)
+	_, err = svc.PutItem(input)
 	if err != nil {
 		log.Fatalf("Error putting item")
 		return err
